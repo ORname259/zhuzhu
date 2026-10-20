@@ -27,7 +27,7 @@ else
 import sys
 BLOCK = '''        <receiver
             android:name="com.zhuzhucheng.app.ScaleWidgetProvider"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/widget_label">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

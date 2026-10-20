@@ -54,6 +54,22 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon --stacktrace
 
+      - name: 校验小组件声明进了最终产物
+        run: |
+          set -euo pipefail
+          M=$(find android/app/build/intermediates -path '*merged_manifest*' -name 'AndroidManifest.xml' | head -1)
+          [ -n "$M" ] || { echo "!! 找不到合并后的 AndroidManifest.xml"; exit 1; }
+          echo "合并清单：$M"
+          grep -q "ScaleWidgetProvider" "$M" || { echo "!! 小组件 receiver 没进最终清单"; exit 1; }
+          echo "---- receiver 实际内容 ----"
+          sed -n '/ScaleWidgetProvider/,/<\/receiver>/p' "$M"
+          AAPT=$(ls "${ANDROID_HOME:-/usr/local/lib/android/sdk}"/build-tools/*/aapt 2>/dev/null | tail -1 || true)
+          if [ -n "$AAPT" ]; then
+            echo "---- APK 内的清单 ----"
+            "$AAPT" dump xmltree android/app/build/outputs/apk/debug/app-debug.apk AndroidManifest.xml \
+              | grep -A 6 -i "ScaleWidgetProvider" || echo "(APK 清单里没搜到，注意)"
+          fi
+
       - name: 检查产物
         run: |
           APK=android/app/build/outputs/apk/debug/app-debug.apk
