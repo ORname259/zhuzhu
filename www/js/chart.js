@@ -5,6 +5,12 @@ window.ZZ = window.ZZ || {};
   var DAY = 86400000;
   var PAD = { l: 46, r: 16, t: 20, b: 30 };
 
+  var PAL = {
+    line: '#e3f1e5', ink3: '#9db8a2', accent: '#3d9c5c', accent2: '#6cbf83',
+    deep: '#2f6b47', tag: '#ff8a3d', toastBg: 'rgba(34,61,41,.92)', toastFg: '#cdf0d6'
+  };
+  function pal() { return PAL; }
+
   function Chart(canvas) {
     this.cv = canvas;
     this.ctx = canvas.getContext('2d');
@@ -47,7 +53,7 @@ window.ZZ = window.ZZ || {};
   };
 
   Chart.prototype.draw = function () {
-    var o = this.opts, ctx = this.ctx, cv = this.cv;
+    var o = this.opts, ctx = this.ctx, cv = this.cv, P = pal();
     if (!o) return;
     var cssW = cv.clientWidth || 320;
     var cssH = cv.clientHeight || 230;
@@ -64,7 +70,7 @@ window.ZZ = window.ZZ || {};
     var plotH = cssH - PAD.t - PAD.b;
 
     if (!series.length) {
-      ctx.fillStyle = '#b9a8ae';
+      ctx.fillStyle = P.ink3;
       ctx.font = '13px system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('还没有记录，先去记一斤吧', cssW / 2, cssH / 2);
@@ -102,10 +108,10 @@ window.ZZ = window.ZZ || {};
     for (var g = 0; g < t.ticks.length; g++) {
       var yv = t.ticks[g], yy = Y(yv);
       if (yy < PAD.t - 2 || yy > PAD.t + plotH + 2) continue;
-      ctx.strokeStyle = '#f4e3e7';
+      ctx.strokeStyle = P.line;
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(PAD.l, yy); ctx.lineTo(cssW - PAD.r, yy); ctx.stroke();
-      ctx.fillStyle = '#c0aab1';
+      ctx.fillStyle = P.ink3;
       ctx.fillText(yv % 1 === 0 ? String(yv) : yv.toFixed(1), PAD.l - 6, yy);
     }
 
@@ -120,7 +126,7 @@ window.ZZ = window.ZZ || {};
       var key = p.day;
       if (seen[key]) continue;
       seen[key] = 1;
-      ctx.fillStyle = '#c0aab1';
+      ctx.fillStyle = P.ink3;
       ctx.fillText(ZZ.mdOf(p.day), X(p.day), PAD.t + plotH + 8);
     }
 
@@ -129,18 +135,18 @@ window.ZZ = window.ZZ || {};
       var ty = Y(o.target);
       ctx.save();
       ctx.setLineDash([5, 4]);
-      ctx.strokeStyle = '#f0a3b4';
+      ctx.strokeStyle = P.accent2;
       ctx.lineWidth = 1.2;
       ctx.beginPath(); ctx.moveTo(PAD.l, ty); ctx.lineTo(cssW - PAD.r, ty); ctx.stroke();
       ctx.restore();
-      ctx.fillStyle = '#e0748f';
+      ctx.fillStyle = P.accent;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'bottom';
       ctx.fillText('目标 ' + ZZ.fmt(o.target) + ' 斤', PAD.l + 2, ty - 2);
     }
 
     /* 原始折线 */
-    ctx.strokeStyle = '#f58ba6';
+    ctx.strokeStyle = P.accent2;
     ctx.lineWidth = 2;
     ctx.lineJoin = 'round';
     ctx.beginPath();
@@ -154,7 +160,7 @@ window.ZZ = window.ZZ || {};
 
     /* 移动平均线 */
     if (ma && ma.length > 1) {
-      ctx.strokeStyle = '#a05c72';
+      ctx.strokeStyle = P.deep;
       ctx.lineWidth = 2.6;
       ctx.globalAlpha = 0.85;
       ctx.beginPath();
@@ -172,7 +178,7 @@ window.ZZ = window.ZZ || {};
       var tagged = (pt.d.tags && pt.d.tags.length) || pt.d.note;
       ctx.beginPath();
       ctx.arc(pt.x, pt.y, tagged ? 3.4 : 2.4, 0, Math.PI * 2);
-      ctx.fillStyle = tagged ? '#ff8a3d' : '#f58ba6';
+      ctx.fillStyle = tagged ? P.tag : P.accent2;
       ctx.fill();
       if (tagged) {
         ctx.strokeStyle = '#fff';
@@ -186,14 +192,14 @@ window.ZZ = window.ZZ || {};
     /* 点选气泡 */
     if (this.pick >= 0 && pts[this.pick]) {
       var sel = pts[this.pick], d = sel.d;
-      ctx.strokeStyle = '#f0a3b4';
+      ctx.strokeStyle = P.accent2;
       ctx.lineWidth = 1;
       ctx.setLineDash([3, 3]);
       ctx.beginPath(); ctx.moveTo(sel.x, PAD.t); ctx.lineTo(sel.x, PAD.t + plotH); ctx.stroke();
       ctx.setLineDash([]);
       ctx.beginPath(); ctx.arc(sel.x, sel.y, 5, 0, Math.PI * 2);
       ctx.fillStyle = '#fff'; ctx.fill();
-      ctx.strokeStyle = '#ef6f92'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 2; ctx.stroke();
 
       var l1 = ZZ.ymd(d.day) + ' ' + ZZ.weekday(d.day);
       var l2 = ZZ.fmt(d.jin) + ' 斤' + (d.count > 1 ? '（当天 ' + d.count + ' 次）' : '');
@@ -206,11 +212,11 @@ window.ZZ = window.ZZ || {};
       var bh = lines.length * 15 + 10;
       var bx = Math.min(Math.max(PAD.l, sel.x - bw / 2), cssW - PAD.r - bw);
       var by = sel.y - bh - 10 < PAD.t ? sel.y + 12 : sel.y - bh - 10;
-      ctx.fillStyle = 'rgba(74,44,53,0.92)';
+      ctx.fillStyle = 'P.toastBg';
       roundRect(ctx, bx, by, bw, bh, 7); ctx.fill();
       ctx.textAlign = 'left'; ctx.textBaseline = 'top';
       for (var w = 0; w < lines.length; w++) {
-        ctx.fillStyle = w === 1 ? '#ffd7e2' : '#fff';
+        ctx.fillStyle = w === 1 ? P.toastFg : '#fff';
         ctx.font = (w === 1 ? 'bold ' : '') + '11px system-ui, sans-serif';
         ctx.fillText(lines[w], bx + 8, by + 6 + w * 15);
       }

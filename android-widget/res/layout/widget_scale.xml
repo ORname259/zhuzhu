@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="猪猪称 · 上次"
-        android:textColor="#B4808E"
+        android:textColor="#6E8F75"
         android:textSize="11sp" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_marginTop="2dp"
         android:gravity="center"
         android:text="—"
-        android:textColor="#4A2C35"
+        android:textColor="#223D29"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -33,7 +33,7 @@
         android:gravity="center"
         android:maxLines="2"
         android:text="打开一次猪猪称，之后就能在桌面直接记"
-        android:textColor="#B4808E"
+        android:textColor="#6E8F75"
         android:textSize="10sp" />
 
     <LinearLayout
@@ -52,7 +52,7 @@
             android:clickable="true"
             android:gravity="center"
             android:text="-1"
-            android:textColor="#8C5A68"
+            android:textColor="#46704F"
             android:textSize="13sp" />
 
         <TextView
@@ -65,7 +65,7 @@
             android:clickable="true"
             android:gravity="center"
             android:text="-0.1"
-            android:textColor="#8C5A68"
+            android:textColor="#46704F"
             android:textSize="13sp" />
 
         <TextView
@@ -92,7 +92,7 @@
             android:clickable="true"
             android:gravity="center"
             android:text="+0.1"
-            android:textColor="#8C5A68"
+            android:textColor="#46704F"
             android:textSize="13sp" />
 
         <TextView
@@ -104,7 +104,7 @@
             android:clickable="true"
             android:gravity="center"
             android:text="+1"
-            android:textColor="#8C5A68"
+            android:textColor="#46704F"
             android:textSize="13sp" />
     </LinearLayout>
 </LinearLayout>

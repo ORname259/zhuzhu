@@ -7,7 +7,7 @@ function makeEl(tag, id) {
     tagName: (tag || 'div').toUpperCase(),
     id: id || '',
     attrs: {},
-    style: {},
+    style: { setProperty: function (k, v) { this[k] = v; }, removeProperty: function (k) { delete this[k]; } },
     children: [],
     _text: '',
     _html: '',
