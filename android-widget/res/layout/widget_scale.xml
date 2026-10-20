@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_body"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/widget_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="猪猪称 · 上次"
+        android:textColor="#B4808E"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/widget_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="—"
+        android:textColor="#4A2C35"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="打开一次猪猪称，之后就能在桌面直接记"
+        android:textColor="#B4808E"
+        android:textSize="10sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_d1"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/widget_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="-1"
+            android:textColor="#8C5A68"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/btn_d2"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/widget_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="-0.1"
+            android:textColor="#8C5A68"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/btn_same"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1.25"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/widget_btn_accent"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="记一次"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_d3"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/widget_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="+0.1"
+            android:textColor="#8C5A68"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/btn_d4"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/widget_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="+1"
+            android:textColor="#8C5A68"
+            android:textSize="13sp" />
+    </LinearLayout>
+</LinearLayout>

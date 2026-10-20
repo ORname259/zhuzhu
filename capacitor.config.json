@@ -1,0 +1,13 @@
+{
+  "appId": "com.zhuzhucheng.app",
+  "appName": "猪猪称",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#fff5f7"
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

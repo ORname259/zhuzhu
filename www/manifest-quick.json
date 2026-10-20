@@ -1,0 +1,17 @@
+{
+  "name": "快速记一斤",
+  "short_name": "记一斤",
+  "description": "猪猪称桌面快捷入口：点开就是数字键盘。",
+  "lang": "zh-CN",
+  "start_url": "./quick.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff5f7",
+  "theme_color": "#fff5f7",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
