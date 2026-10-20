@@ -22,7 +22,7 @@ MANIFEST="$MAIN/AndroidManifest.xml"
 if grep -q "ScaleWidgetProvider" "$MANIFEST"; then
   echo "→ receiver 已存在，跳过"
 else
-  echo "→ 注入 receiver"
+  echo "→ 注入 receiver 与键盘模式"
   python3 - "$MANIFEST" <<'PY'
 import sys
 BLOCK = '''        <receiver
@@ -43,8 +43,18 @@ with open(path, encoding='utf-8') as fh:
     text = fh.read()
 if '</application>' not in text:
     sys.exit('!! AndroidManifest.xml 里找不到 </application>')
+text = text.replace('</application>', BLOCK, 1)
+if 'windowSoftInputMode' not in text:
+    anchor = 'android:name=".MainActivity"'
+    if anchor in text:
+        text = text.replace(
+            anchor,
+            anchor + '\n            android:windowSoftInputMode="adjustResize"',
+            1)
+    else:
+        print('!! 没找到 MainActivity 声明，跳过 windowSoftInputMode')
 with open(path, 'w', encoding='utf-8') as fh:
-    fh.write(text.replace('</application>', BLOCK, 1))
+    fh.write(text)
 print('   manifest patched')
 PY
 fi

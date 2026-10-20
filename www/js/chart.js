@@ -6,8 +6,8 @@ window.ZZ = window.ZZ || {};
   var PAD = { l: 46, r: 16, t: 20, b: 30 };
 
   var PAL = {
-    line: '#e3f1e5', ink3: '#9db8a2', accent: '#3d9c5c', accent2: '#6cbf83',
-    deep: '#2f6b47', tag: '#ff8a3d', toastBg: 'rgba(34,61,41,.92)', toastFg: '#cdf0d6'
+    line: '#d9eadf', ink3: '#91b09b', accent: '#3d9c5c', accent2: '#6bc588',
+    deep: '#2a6c40', tag: '#ff8a3d', toastBg: 'rgba(33,54,40,.93)', toastFg: '#dfece3'
   };
   function pal() { return PAL; }
 
